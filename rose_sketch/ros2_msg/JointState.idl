@@ -1,0 +1,10 @@
+#include "Header.idl"
+
+struct JointState
+{
+    Header header;
+    sequence<string> name;
+    sequence<double> position;
+    sequence<double> velocity;
+    sequence<double> effort;    
+};

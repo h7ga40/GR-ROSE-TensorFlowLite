@@ -1,0 +1,39 @@
+{
+    "configurations": [
+        {
+            "name": "GR-ROSE",
+            "includePath": [
+                "${workspaceFolder}/../tensorflow-microlite",
+                "${workspaceFolder}/../tensorflow-microlite/third_party/flatbuffers/include",
+                "${workspaceFolder}/../tensorflow-microlite/third_party/gemmlowp",
+                "${workspaceFolder}/../tensorflow-microlite/third_party/kissfft",
+                "${workspaceFolder}/../tensorflow-microlite/third_party/person_model_grayscale",
+                "${workspaceFolder}/../rose_sketch/arduino",
+                "${workspaceFolder}/../rose_sketch/arduino/core",
+                "${workspaceFolder}/../rose_sketch/FreeRTOS/src/FIT_modified_code/r_bsp/mcu/rx65n/register_access/gnuc",
+                "${workspaceFolder}/../magic_wand/lib",
+                "${workspaceFolder}/../magic_wand/src"
+            ],
+            "defines": [
+                "CPPAPP",
+                "NDEBUG",
+                "TF_LITE_MCU_DEBUG_LOG",
+                "TF_LITE_STATIC_MEMORY",
+                "GEMMLOWP_ALLOW_SLOW_SCALAR_FALLBACK",
+                "ARDUINOSTL_M_H",
+                "ARDUINO=144",
+                "GRROSE",
+                "__RX600__",
+                "__RTOS",
+                "USING_UXR",
+                "USING_WIFI"
+            ],
+            "windowsSdkVersion": "10.0.17763.0",
+            "compilerPath": "C:\\Program Files (x86)\\GCC for Renesas RX 8.3.0.201904-GNURX-ELF\\rx-elf\\rx-elf\\bin\\rx-elf-gcc.exe",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "gcc-x64"
+        }
+    ],
+    "version": 4
+}
