@@ -14,7 +14,14 @@ limitations under the License.
 ==============================================================================*/
 
 #include "main_functions.h"
+#include "PCM.h"
+#include "interrupt_handlers.h"
 
 // Arduino automatically calls the setup() and loop() functions in a sketch, so
 // where other systems need their own main routine in this file, it can be left
 // empty.
+
+void INT_Excep_DMAC_DMAC0I(void)
+{
+	PCM.IrqHandler();
+}

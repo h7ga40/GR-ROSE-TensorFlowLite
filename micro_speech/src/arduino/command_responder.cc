@@ -16,9 +16,11 @@ limitations under the License.
 #include "command_responder.h"
 #include "Arduino.h"
 
-#define LEDR PIN_LED1
-#define LEDG PIN_LED2
-#define LEDB LED_BUILTIN
+#define LEDR PIN_LED2
+#define LEDG PIN_LED1
+#define LEDB 0
+#undef LED_BUILTIN
+#define LED_BUILTIN 1
 
 // Toggles the built-in LED every inference, and lights a colored LED depending
 // on which word was detected.
@@ -35,9 +37,9 @@ void RespondToCommand(tflite::ErrorReporter* error_reporter,
     // Ensure the LED is off by default.
     // Note: The RGB LEDs on the Arduino Nano 33 BLE
     // Sense are on when the pin is LOW, off when HIGH.
-    digitalWrite(LEDR, HIGH);
-    digitalWrite(LEDG, HIGH);
-    digitalWrite(LEDB, HIGH);
+    digitalWrite(LEDR, LOW);
+    digitalWrite(LEDG, LOW);
+    digitalWrite(LEDB, LOW);
     is_initialized = true;
   }
   static int32_t last_command_time = 0;
@@ -50,17 +52,17 @@ void RespondToCommand(tflite::ErrorReporter* error_reporter,
     // If we hear a command, light up the appropriate LED
     if (found_command[0] == 'y') {
       last_command_time = current_time;
-      digitalWrite(LEDG, LOW);  // Green for yes
+      digitalWrite(LEDG, HIGH);  // Green for yes
     }
 
     if (found_command[0] == 'n') {
       last_command_time = current_time;
-      digitalWrite(LEDR, LOW);  // Red for no
+      digitalWrite(LEDR, HIGH);  // Red for no
     }
 
     if (found_command[0] == 'u') {
       last_command_time = current_time;
-      digitalWrite(LEDB, LOW);  // Blue for unknown
+      digitalWrite(LEDB, HIGH);  // Blue for unknown
     }
   }
 
@@ -70,9 +72,9 @@ void RespondToCommand(tflite::ErrorReporter* error_reporter,
     if (last_command_time < (current_time - 3000)) {
       last_command_time = 0;
       digitalWrite(LED_BUILTIN, LOW);
-      digitalWrite(LEDR, HIGH);
-      digitalWrite(LEDG, HIGH);
-      digitalWrite(LEDB, HIGH);
+      digitalWrite(LEDR, LOW);
+      digitalWrite(LEDG, LOW);
+      digitalWrite(LEDB, LOW);
     }
     // If it is non-zero but <3 seconds ago, do nothing.
     return;

@@ -30,15 +30,15 @@ limitations under the License.
 
 #include "audio_provider.h"
 
-#include "PDM.h"
+#include "PCM.h"
 #include "micro_features/micro_model_settings.h"
 
-PDMClass PDM(0,0,0);
+PCMClass PCM(PIN_A0,0);
 
 namespace {
 bool g_is_audio_initialized = false;
 // An internal buffer able to fit 16x our sample size
-constexpr int kAudioCaptureBufferSize = DEFAULT_PDM_BUFFER_SIZE * 16;
+constexpr int kAudioCaptureBufferSize = DEFAULT_PCM_BUFFER_SIZE * 16;
 int16_t g_audio_capture_buffer[kAudioCaptureBufferSize];
 // A buffer that holds our output
 int16_t g_audio_output_buffer[kMaxAudioSampleSize];
@@ -49,7 +49,7 @@ volatile int32_t g_latest_audio_timestamp = 0;
 
 void CaptureSamples() {
   // This is how many bytes of new data we have each time this is called
-  const int number_of_samples = DEFAULT_PDM_BUFFER_SIZE;
+  const int number_of_samples = DEFAULT_PCM_BUFFER_SIZE;
   // Calculate what timestamp the last audio sample represents
   const int32_t time_in_ms =
       g_latest_audio_timestamp +
@@ -60,17 +60,17 @@ void CaptureSamples() {
   // Determine the index of this sample in our ring buffer
   const int capture_index = start_sample_offset % kAudioCaptureBufferSize;
   // Read the data to the correct place in our buffer
-  PDM.read(g_audio_capture_buffer + capture_index, DEFAULT_PDM_BUFFER_SIZE);
+  PCM.read(g_audio_capture_buffer + capture_index, DEFAULT_PCM_BUFFER_SIZE);
   // This is how we let the outside world know that new audio data has arrived.
   g_latest_audio_timestamp = time_in_ms;
 }
 
 TfLiteStatus InitAudioRecording(tflite::ErrorReporter* error_reporter) {
   // Hook up the callback that will be called with each sample
-  PDM.onReceive(CaptureSamples);
+  PCM.onReceive(CaptureSamples);
   // Start listening for audio: MONO @ 16KHz with gain at 20
-  PDM.begin(1, kAudioSampleFrequency);
-  PDM.setGain(20);
+  PCM.begin(1, kAudioSampleFrequency);
+  PCM.setGain(20);
   // Block until we have our first audio sample
   while (!g_latest_audio_timestamp) {
   }

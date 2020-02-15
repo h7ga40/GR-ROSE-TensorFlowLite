@@ -46,8 +46,7 @@ PROJECT := micro_speech
 ###############################################################################
 # Objects and Paths
 
-OBJECTS += lib/PDM.o
-OBJECTS += lib/utility/PDMDoubleBuffer.o
+OBJECTS += lib/PCM.o
 OBJECTS += src/arduino/audio_provider.o
 OBJECTS += src/arduino/command_responder.o
 OBJECTS += src/arduino/main.o
@@ -67,6 +66,7 @@ INCLUDE_PATHS += -I../../tensorflow-microlite/third_party/kissfft
 INCLUDE_PATHS += -I../../tensorflow-microlite/third_party/person_model_grayscale
 INCLUDE_PATHS += -I../../rose_sketch/arduino
 INCLUDE_PATHS += -I../../rose_sketch/arduino/core
+INCLUDE_PATHS += -I../../rose_sketch/arduino/rx65n
 INCLUDE_PATHS += -I../../rose_sketch/FreeRTOS/src/FIT_modified_code/r_bsp/mcu/rx65n/register_access/gnuc
 INCLUDE_PATHS += -I../../micro_speech/lib
 INCLUDE_PATHS += -I../../micro_speech/src
