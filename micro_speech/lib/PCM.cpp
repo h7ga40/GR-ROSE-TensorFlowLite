@@ -8,7 +8,8 @@ PCMClass::PCMClass(int inputPin, int dmaCh) :
 	_inputPin(inputPin),
 	_dmaCh(dmaCh),
 	_onReceive(NULL),
-	_DMACm(NULL)
+	_DMACm(NULL),
+	_channels(0)
 {
 }
 
@@ -24,12 +25,12 @@ int PCMClass::begin(int channels, long sampleRate)
 	volatile uint16_t *ad_addr = NULL;
 
 	switch (_inputPin) {
-	case PIN_A0: adans0 |= 1 << 0; ad_addr = &S12AD1.ADDR0; break;
-	case PIN_A1: adans0 |= 1 << 1; ad_addr = &S12AD1.ADDR1; break;
-	case PIN_A2: adans0 |= 1 << 2; ad_addr = &S12AD1.ADDR2; break;
-	case PIN_A3: adans0 |= 1 << 3; ad_addr = &S12AD1.ADDR3; break;
-	case PIN_A4: adans0 |= 1 << 4; ad_addr = &S12AD1.ADDR4; break;
-	case PIN_A5: adans0 |= 1 << 5; ad_addr = &S12AD1.ADDR5; break;
+	case PIN_A0: adans0 |= 1 << 10; ad_addr = &S12AD1.ADDR10; break;
+	case PIN_A1: adans0 |= 1 << 11; ad_addr = &S12AD1.ADDR11; break;
+	case PIN_A2: adans0 |= 1 << 12; ad_addr = &S12AD1.ADDR12; break;
+	case PIN_A3: adans0 |= 1 << 13; ad_addr = &S12AD1.ADDR13; break;
+	case PIN_A4: adans0 |= 1 << 6; ad_addr = &S12AD1.ADDR6; break;
+	case PIN_A5: adans0 |= 1 << 7; ad_addr = &S12AD1.ADDR7; break;
 	default: return 0;
 	}
 
@@ -44,7 +45,8 @@ int PCMClass::begin(int channels, long sampleRate)
 
 	/* 選択型割り込みB設定 S12ADIを146に割り当て */
 	IEN(PERIB, INTB146) = 0;
-	ICU.SLIBR146.BIT.SLI = VECT_S12AD1_S12ADI1;
+	IPR(PERIB, INTB146) = 1;
+	ICU.SLIBR146.BIT.SLI = 68;
 
 	/* 割り込み禁止 */
 	switch (_dmaCh){
@@ -84,7 +86,7 @@ int PCMClass::begin(int channels, long sampleRate)
 	/* A/Dデータレジスタのフォーマットを右詰めにする */
 	S12AD1.ADCER.BIT.ADRFMT = 0b0;
 	/* TMR0.TCORAとTMR0.TCNT */
-	S12AD1.ADSTRGR.BIT.TRSB = 0b011101;
+	S12AD1.ADSTRGR.BIT.TRSA = 0b011101;
 
 	/* 16ビットカウントモード */
 	TMR0.TCCR.BIT.CSS = 0b11;
@@ -116,7 +118,7 @@ int PCMClass::begin(int channels, long sampleRate)
 	}
 
 	/* DMACの起動要因を設定する */
-	*ICU_DMRSRm = 146;
+	*ICU_DMRSRm = VECT_S12AD1_S12ADI1;
 
 	/* 転送先アドレス更新モード：インクリメント */
 	_DMACm->DMAMD.BIT.DM = 0b10;
@@ -186,7 +188,7 @@ void PCMClass::end()
 	IEN(PERIB, INTB146) = 0;
 
 	/* コンペアマッチAによるA/D変換開始要求を禁止 */
-	TMR0.TCSR.BIT.ADTE = 0b1;
+	TMR0.TCSR.BIT.ADTE = 0b0;
 
 	/* AD変換停止 */
 	S12AD1.ADCSR.BIT.ADST = 0;
@@ -197,7 +199,7 @@ void PCMClass::end()
 
 int PCMClass::read(void *buffer, size_t size)
 {
-	//disableInterrupt(DMAC);
+	//IEN(DMAC, DMACxI) = 0;
 
 	int temp;
 	int16_t *pos = (int16_t *)buffer, *end = (int16_t *)((intptr_t)buffer + size);
@@ -211,7 +213,7 @@ int PCMClass::read(void *buffer, size_t size)
 		*pos = temp;
 	}
 
-	//enableInterrupt(DMAC);
+	//IEN(DMAC, DMACxI) = 1;
 
 	return (intptr_t)pos - (intptr_t)buffer;
 }
