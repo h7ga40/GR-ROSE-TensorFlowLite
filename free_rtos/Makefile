@@ -185,7 +185,7 @@ ASM_FLAGS += -Wstack-usage=256
 
 ASM_FLAGS := $(ASM_FLAGS) $(MACRO_DEFINES)
 
-LD_FLAGS += -Wl,--gc-sections
+#LD_FLAGS += -Wl,--gc-sections
 LD_FLAGS += -mcpu=rx64M
 LD_FLAGS += -m64bit-doubles
 LD_FLAGS += -Wl,-Map=$(PROJECT).map,--cref
