@@ -427,24 +427,15 @@ RANLIB  = rx-elf-ranlib
 TCINSTALL := $(shell which $(CC))/../../
 GCC_VERSION := $(shell $(CC) -dumpversion)
 
-C_FLAGS += -std=gnu11
-C_FLAGS += -mcpu=rx64M
+C_FLAGS += -std=gnu99
+C_FLAGS += -mcpu=rx64m
 C_FLAGS += -mlittle-endian-data
 C_FLAGS += -m64bit-doubles
 C_FLAGS += -misa=v2
-C_FLAGS += -Og
+C_FLAGS += -O0
 C_FLAGS += -g3
-C_FLAGS += -fmessage-length=0
 C_FLAGS += -ffunction-sections
 C_FLAGS += -fdata-sections
-C_FLAGS += -fno-builtin
-C_FLAGS += -fno-delete-null-pointer-checks
-C_FLAGS += -fno-exceptions
-C_FLAGS += -fno-rtti
-C_FLAGS += -fno-unwind-tables
-C_FLAGS += -fomit-frame-pointer
-C_FLAGS += -fpermissive
-C_FLAGS += -funsigned-char
 C_FLAGS += -Wall
 C_FLAGS += -Wextra
 C_FLAGS += -Wmissing-field-initializers
@@ -458,24 +449,15 @@ C_FLAGS += -Wstack-usage=256
 
 C_FLAGS := $(C_FLAGS) $(MACRO_DEFINES)
 
-CXX_FLAGS += -std=gnu++11
-CXX_FLAGS += -mcpu=rx64M
+#CXX_FLAGS += -std=gnu++11
+CXX_FLAGS += -mcpu=rx64m
 CXX_FLAGS += -mlittle-endian-data
 CXX_FLAGS += -m64bit-doubles
 CXX_FLAGS += -misa=v2
 CXX_FLAGS += -O2
 CXX_FLAGS += -g3
-CXX_FLAGS += -fmessage-length=0
 CXX_FLAGS += -ffunction-sections
 CXX_FLAGS += -fdata-sections
-CXX_FLAGS += -fno-builtin
-CXX_FLAGS += -fno-delete-null-pointer-checks
-CXX_FLAGS += -fno-exceptions
-CXX_FLAGS += -fno-rtti
-CXX_FLAGS += -fno-unwind-tables
-CXX_FLAGS += -fomit-frame-pointer
-CXX_FLAGS += -fpermissive
-CXX_FLAGS += -funsigned-char
 CXX_FLAGS += -Wall
 CXX_FLAGS += -Wextra
 CXX_FLAGS += -Wmissing-field-initializers
@@ -491,23 +473,14 @@ CXX_FLAGS := $(CXX_FLAGS) $(MACRO_DEFINES)
 
 ASM_FLAGS += -x
 ASM_FLAGS += assembler-with-cpp
-ASM_FLAGS += -mcpu=rx64M
+ASM_FLAGS += -mcpu=rx64m
 ASM_FLAGS += -mlittle-endian-data
 ASM_FLAGS += -m64bit-doubles
 ASM_FLAGS += -misa=v2
-ASM_FLAGS += -Og
+ASM_FLAGS += -O0
 ASM_FLAGS += -g3
-ASM_FLAGS += -fmessage-length=0
 ASM_FLAGS += -ffunction-sections
 ASM_FLAGS += -fdata-sections
-ASM_FLAGS += -fno-builtin
-ASM_FLAGS += -fno-delete-null-pointer-checks
-ASM_FLAGS += -fno-exceptions
-ASM_FLAGS += -fno-rtti
-ASM_FLAGS += -fno-unwind-tables
-ASM_FLAGS += -fomit-frame-pointer
-ASM_FLAGS += -fpermissive
-ASM_FLAGS += -funsigned-char
 ASM_FLAGS += -Wall
 ASM_FLAGS += -Wextra
 ASM_FLAGS += -Wmissing-field-initializers
@@ -522,7 +495,7 @@ ASM_FLAGS += -Wstack-usage=256
 ASM_FLAGS := $(ASM_FLAGS) $(MACRO_DEFINES)
 
 #LD_FLAGS += -Wl,--gc-sections
-LD_FLAGS += -mcpu=rx64M
+LD_FLAGS += -mcpu=rx64m
 LD_FLAGS += -m64bit-doubles
 LD_FLAGS += -Wl,-Map=$(PROJECT).map,--cref
 LD_FLAGS += -L"$(TCINSTALL)rx-elf\lib\64-bit-double"

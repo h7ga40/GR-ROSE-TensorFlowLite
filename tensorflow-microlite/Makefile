@@ -150,7 +150,7 @@ TCINSTALL := $(shell which $(CC))/../../
 GCC_VERSION := $(shell $(CC) -dumpversion)
 
 C_FLAGS += -std=gnu11
-C_FLAGS += -mcpu=rx64M
+C_FLAGS += -mcpu=rx64m
 C_FLAGS += -mlittle-endian-data
 C_FLAGS += -m64bit-doubles
 C_FLAGS += -misa=v2
@@ -181,7 +181,7 @@ C_FLAGS += -Wstack-usage=256
 C_FLAGS := $(C_FLAGS) $(MACRO_DEFINES)
 
 CXX_FLAGS += -std=gnu++11
-CXX_FLAGS += -mcpu=rx64M
+CXX_FLAGS += -mcpu=rx64m
 CXX_FLAGS += -mlittle-endian-data
 CXX_FLAGS += -m64bit-doubles
 CXX_FLAGS += -misa=v2
@@ -213,7 +213,7 @@ CXX_FLAGS := $(CXX_FLAGS) $(MACRO_DEFINES)
 
 ASM_FLAGS += -x
 ASM_FLAGS += assembler-with-cpp
-ASM_FLAGS += -mcpu=rx64M
+ASM_FLAGS += -mcpu=rx64m
 ASM_FLAGS += -mlittle-endian-data
 ASM_FLAGS += -m64bit-doubles
 ASM_FLAGS += -misa=v2
@@ -244,7 +244,7 @@ ASM_FLAGS += -Wstack-usage=256
 ASM_FLAGS := $(ASM_FLAGS) $(MACRO_DEFINES)
 
 #LD_FLAGS += -Wl,--gc-sections
-LD_FLAGS += -mcpu=rx64M
+LD_FLAGS += -mcpu=rx64m
 LD_FLAGS += -m64bit-doubles
 LD_FLAGS += -Wl,-Map=$(PROJECT).map,--cref
 LD_FLAGS += -L"$(TCINSTALL)rx-elf\lib\64-bit-double"
