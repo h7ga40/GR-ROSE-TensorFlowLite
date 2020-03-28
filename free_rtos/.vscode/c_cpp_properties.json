@@ -7,7 +7,6 @@
                 "${workspaceFolder}/../tensorflow-microlite/third_party/flatbuffers/include",
                 "${workspaceFolder}/../tensorflow-microlite/third_party/gemmlowp",
                 "${workspaceFolder}/../tensorflow-microlite/third_party/kissfft",
-                "${workspaceFolder}/../tensorflow-microlite/third_party/person_model_grayscale",
                 "${workspaceFolder}/../rose_sketch/arduino",
                 "${workspaceFolder}/../rose_sketch/arduino/core",
                 "${workspaceFolder}/../rose_sketch/FreeRTOS/src/FIT_modified_code/r_bsp/mcu/rx65n/register_access/gnuc",
@@ -28,7 +27,7 @@
                 "USING_WIFI"
             ],
             "windowsSdkVersion": "10.0.17763.0",
-            "compilerPath": "C:\\Program Files (x86)\\GCC for Renesas RX 8.3.0.201904-GNURX-ELF\\rx-elf\\rx-elf\\bin\\rx-elf-gcc.exe",
+            "compilerPath": "\"C:\\Program Files (x86)\\GCC for Renesas RX 8.3.0.201904-GNURX-ELF\\rx-elf\\rx-elf\\bin\\rx-elf-gcc.exe\"",
             "cStandard": "c11",
             "cppStandard": "c++17",
             "intelliSenseMode": "gcc-x64"
