@@ -432,7 +432,7 @@ C_FLAGS += -mcpu=rx64m
 C_FLAGS += -mlittle-endian-data
 C_FLAGS += -m64bit-doubles
 C_FLAGS += -misa=v2
-C_FLAGS += -O0
+C_FLAGS += -O2
 C_FLAGS += -g3
 C_FLAGS += -ffunction-sections
 C_FLAGS += -fdata-sections
@@ -477,7 +477,7 @@ ASM_FLAGS += -mcpu=rx64m
 ASM_FLAGS += -mlittle-endian-data
 ASM_FLAGS += -m64bit-doubles
 ASM_FLAGS += -misa=v2
-ASM_FLAGS += -O0
+ASM_FLAGS += -O2
 ASM_FLAGS += -g3
 ASM_FLAGS += -ffunction-sections
 ASM_FLAGS += -fdata-sections
