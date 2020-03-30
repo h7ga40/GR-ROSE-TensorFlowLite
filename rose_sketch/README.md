@@ -101,11 +101,11 @@ https://www.renesas.com/us/en/products/software-tools/tools/ide/e2studio.html
 
 The version used for this demonstration is V.7.5.0.  
 
-(2) GCC for Renesas 8.3.0.201904-SPI1-GNURX Windows Toolchain(ELF)  
+(2) GCC for Renesas 4.8.4.201902-SPI1-GNURX Windows Toolchain(ELF)  
 Download from the web site and follow the instructions.  
 https://gcc-renesas.com/rx-download-toolchains/  
 
-The version used for this demonstration is 8.3.0.201904.  
+The version used for this demonstration is 4.8.4.201902.  
 
 ## Demonstration procedure
 

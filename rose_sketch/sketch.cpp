@@ -1,4 +1,4 @@
-/* GR-ROSE Sketch template V1.05 */
+/* GR-ROSE Sketch template V1.06 */
 #include <Arduino.h>
 #include "FreeRTOS.h"
 #include "task.h"

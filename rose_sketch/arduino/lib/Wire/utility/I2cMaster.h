@@ -109,6 +109,10 @@ class SoftI2cMaster : public I2cMasterBase {
   void stop(void);
   bool write(uint8_t b);
   void setFrequency(int freq);
+#ifdef GRROSE
+  // set pin for added
+  void setWirePin(int sda, int scl);
+#endif
  private:
   int delayClock;
   uint8_t sdaPin_;

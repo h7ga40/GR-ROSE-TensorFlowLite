@@ -110,11 +110,11 @@ https://www.renesas.com/jp/ja/products/software-tools/tools/ide/e2studio.html
 
 動作確認を行ったバージョンは「V.7.5.0」です。  
 
-(2) GCC for Renesas 8.3.0.201904-SPI1-GNURX Windows Toolchain(ELF)  
+(2) GCC for Renesas 4.8.4.201902-SPI1-GNURX Windows Toolchain(ELF)  
 以下からダウンロードします。インストール方法についてはWebページ上のドキュメントを参照してください。  
 https://gcc-renesas.com/ja/rx-download-toolchains/  
 
-動作確認を行ったバージョンは「8.3.0.201904」です。  
+動作確認を行ったバージョンは「4.8.4.201902」です。  
 
 
 ## デモ実行手順
